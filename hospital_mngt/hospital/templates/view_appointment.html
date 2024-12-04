@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% include 'base.html' %}
+    {% include 'navigation.html' %}
+</head>
+<body>
+{% block content %}
+<div>
+  <h2 class="text-center">View Appointment</h2>
+  <table class="table table-hover" id="example">
+    <thead>
+    <tr>
+      <th>AppointmentId</th>
+      <th>DoctorName</th>
+      <th>PatientName</th>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for i in doc %}
+    <tr>
+        <td>{{ i.id }}</td>
+        <td>{{ i.doctor.name }}</td> <!-- Access the 'name' field of the related Doctor object -->
+        <td>{{ i.patient.name }}</td> <!-- Access the 'name' field of the related Patient object -->
+        <td>{{ i.date }}</td>
+        <td>{{ i.time }}</td>
+        <td>
+            <a href="{% url 'delete_appointment' i.id %}" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+</tbody>
+
+  </table>
+</div>
+{% endblock content %}
+</body>
+</html>
+{% include 'footer.html' %}

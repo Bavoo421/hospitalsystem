@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% include 'base.html' %}
+    {% include 'navigation.html' %}
+</head>
+<body>
+{% block content %}
+<div>
+  <h2>View Doctor</h2>
+  <table class="table table-hover" id="example">
+    <thead>
+    <tr>
+      <th>DoctorId</th>
+      <th>Name</th>
+      <th>Mobile</th>
+      <th>Specialization</th>
+      <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for i in doc %}
+    <tr>
+      <td>{{i.id}}</td>
+      <td>{{i.name}}</td>
+      <td>{{i.mobile}}</td>
+      <td>{{i.specialization}}</td>
+      <td><a href="{% url 'delete_doctor' i.id %}" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger">Delete</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock content %}
+</body>
+</html>
+{% include 'footer.html' %}
